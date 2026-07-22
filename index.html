@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/icon-192.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#15362A" />
+
+    <!-- Primary SEO -->
+    <title>Orree | ওরি — প্রকৃতির আভিজাত্য আপনার প্রাপ্য</title>
+    <meta name="description" content="চুইঝাল ক্যান্ডি, চুইঝাল চায়ের মসলা আর চুইঝাল বাইটস — শিকড়ের স্বাদ, যত্নে বানানো। ওরি নিয়ে এসেছে গ্রামবাংলার পুরনো রেসিপি, আপনার হাতের কাছে।" />
+    <meta name="keywords" content="Orree, ওরি, চুইঝাল ক্যান্ডি, চুইঝাল, খুলনার চুইঝাল, বাংলাদেশি প্রিমিয়াম ফুড ব্র্যান্ড, নস্টালজিক খাবার" />
+    <meta name="author" content="Orree" />
+    <link rel="canonical" href="https://orree.bd/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Orree | ওরি" />
+    <meta property="og:title" content="Orree | ওরি — প্রকৃতির আভিজাত্য আপনার প্রাপ্য" />
+    <meta property="og:description" content="আপনি যেই খাবার ভালোবাসেন, তার প্রাপ্য আপনি। শিকড়ের স্বাদ, নতুন করে বাঁধা — ওরি-র চুইঝাল কালেকশন।" />
+    <meta property="og:image" content="https://orree.bd/og-image.jpg" />
+    <meta property="og:url" content="https://orree.bd/" />
+    <meta property="og:locale" content="bn_BD" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Orree | ওরি — প্রকৃতির আভিজাত্য আপনার প্রাপ্য" />
+    <meta name="twitter:description" content="আপনি যেই খাবার ভালোবাসেন, তার প্রাপ্য আপনি। শিকড়ের স্বাদ, নতুন করে বাঁধা।" />
+    <meta name="twitter:image" content="https://orree.bd/og-image.jpg" />
+
+    <!-- Fonts: Anek Bangla (display — premium, warm, variable weight), Hind Siliguri (body — calm & legible), Noto Serif Bengali (quote accent — nostalgic pull-quotes) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Structured data: helps Google show Orree as a rich result -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Orree | ওরি",
+        "url": "https://orree.bd/",
+        "logo": "https://orree.bd/icon-512.png",
+        "sameAs": [],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+8801324881188",
+          "contactType": "customer service",
+          "areaServed": "BD",
+          "availableLanguage": ["bn"]
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Gollamari, Sonadanga",
+          "addressLocality": "Khulna",
+          "postalCode": "9100",
+          "addressCountry": "BD"
+        }
+      }
+    </script>
+
+    <!-- Google Analytics 4 — replace G-XXXXXXXXXX with the real Measurement ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-XXXXXXXXXX", { send_page_view: false }); // SPA: we send page_view manually on route change
+    </script>
+
+    <!-- Meta Pixel — replace 0000000000000000 with the real Pixel ID -->
+    <script>
+      !function (f, b, e, v, n, t, s) {
+        if (f.fbq) return; n = f.fbq = function () {
+          n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+        };
+        if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = "2.0";
+        n.queue = []; t = b.createElement(e); t.async = !0;
+        t.src = v; s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s)
+      }(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
+      fbq("init", "0000000000000000");
+      fbq("track", "PageView");
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
