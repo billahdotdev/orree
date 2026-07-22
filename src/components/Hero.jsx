@@ -58,15 +58,6 @@ export default function Hero({ data }) {
         </div>
       </div>
 
-      <button
-        type="button"
-        onClick={() => scrollTo("#story")}
-        aria-label="নিচে স্ক্রল করুন"
-        className="hidden sm:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-cream/50 hover:text-amber transition-colors"
-      >
-        <span className="text-xs tracking-[0.2em] uppercase">স্ক্রল করুন</span>
-        <ChevronDown size={18} className="animate-bounce" />
-      </button>
     </section>
   );
 }
