@@ -35,7 +35,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "VITE_");
 
   return {
-    base: env.VITE_BASE_PATH || "orree",
+    base: env.VITE_BASE_PATH || "/orree/",
     plugins: [react(), htmlEnv(env)],
     build: {
       target: "es2020",
