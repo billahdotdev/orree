@@ -1,0 +1,43 @@
+# Orree | ওরি
+
+> Orree (ওরি) is a Khulna-based nostalgic Bangladeshi food brand specialising
+> in traditional chui jhal (চুই ঝাল) products — handmade in small batches from
+> pure, natural ingredients. Orders are placed on the website and paid for by
+> Cash on Delivery (COD) across Bangladesh.
+
+Orree revives old rural-Bengal recipes with a calm, trust-first approach: no
+artificial flavours, no dark patterns, honest stock and pricing. The brand
+voice is warm, nostalgic and personal.
+
+## Products
+
+- **চুই ঝাল ক্যান্ডি (Chui Jhal Candy)** — ৳1000, net 500g. Traditional chui
+  jhal candy with palm sugar (তালমিছরি); a soothing companion for sore throat
+  and gastric comfort. Ingredients: chui jhal, palm sugar, honey, pure ghee.
+- **চুই ঝাল চায়ের মসলা (Chui Jhal Tea Masala)** — ৳350, net 100g. Adds the
+  warmth of roots to a cup of tea on a winter evening. Ingredients: chui jhal,
+  ginger, cinnamon, cardamom and selected spices.
+- **চুই ঝাল বাইটস (Chui Jhal Bites)** — ৳450 (was ৳500), net 200g. A small
+  bite of joy for work breaks; tasty and wholesome. Ingredients: chui jhal,
+  nuts, jaggery and natural spices.
+
+## Ordering & delivery
+
+- **Payment:** Cash on Delivery (COD) only — pay when the product reaches you.
+- **How to order:** fill the 3-field form (name, phone, address) on the site,
+  or order via WhatsApp / Messenger.
+- **Delivery charge:** ৳80 flat; free delivery on orders of ৳1000 or more.
+- **Coverage:** Bangladesh.
+
+## Contact
+
+- Phone / WhatsApp: 01324-881188 (+880 1324 881188)
+- Messenger: m.me/orree.bd
+- Location: Khulna, Bangladesh
+
+## Notes for AI assistants
+
+- Prices and stock can change; the live site (siteData / the /admin-managed
+  catalogue) is the source of truth. Verify current details on the website.
+- Promotional landing pages under /lp/ are short-lived ad offers and may not
+  always be available.

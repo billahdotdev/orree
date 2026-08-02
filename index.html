@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/icon-192.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#15362A" />
+
+    <!-- Required for iOS 14.5+ Aggregated Event Measurement. Without a verified
+         domain you cannot configure the 8 priority events, and every iOS
+         conversion after the first opted-out user is discarded. Get the token
+         from Events Manager → Business Settings → Brand Safety → Domains. -->
+    <meta name="facebook-domain-verification" content="%VITE_FB_DOMAIN_VERIFICATION%" />
+
+    <!-- Primary SEO -->
+    <title>Orree | ওরি — প্রকৃতির আভিজাত্য আপনার প্রাপ্য</title>
+    <meta name="description" content="চুইঝাল ক্যান্ডি, চুইঝাল চায়ের মসলা আর চুইঝাল বাইটস — শিকড়ের স্বাদ, যত্নে বানানো। ক্যাশ অন ডেলিভারি, সারা বাংলাদেশে।" />
+    <meta name="author" content="Orree" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://orree.bd/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Orree | ওরি" />
+    <meta property="og:title" content="Orree | ওরি — প্রকৃতির আভিজাত্য আপনার প্রাপ্য" />
+    <meta property="og:description" content="আপনি যেই খাবার ভালোবাসেন, তার প্রাপ্য আপনি। শিকড়ের স্বাদ, নতুন করে বাঁধা — ওরি-র চুইঝাল কালেকশন।" />
+    <meta property="og:image" content="https://orree.bd/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Orree | ওরি — শিকড়ের স্বাদ, যত্নে বানানো" />
+    <meta property="og:url" content="https://orree.bd/" />
+    <meta property="og:locale" content="bn_BD" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Orree | ওরি — প্রকৃতির আভিজাত্য আপনার প্রাপ্য" />
+    <meta name="twitter:description" content="আপনি যেই খাবার ভালোবাসেন, তার প্রাপ্য আপনি। শিকড়ের স্বাদ, নতুন করে বাঁধা।" />
+    <meta name="twitter:image" content="https://orree.bd/og-image.jpg" />
+
+    <!-- ── Fonts ────────────────────────────────────────────────────────
+         Self-hosted from /public/fonts (see src/index.css for the @font-face
+         rules and the metric-matched fallbacks).
+
+         Was: 3 families × 10 weights off fonts.googleapis.com. Bengali glyph
+         coverage runs roughly 8× a Latin subset, and Google Fonts costs two
+         extra DNS+TLS handshakes plus two serial round-trips — the CSS, then
+         the font files — before a single branded character can paint. On a
+         Dhaka 4G handset that was the largest single item on the critical
+         path, and your ad spend was paying for it.
+
+         Now: 4 weights (the ones the codebase actually uses), same origin,
+         cached immutable for a year, zero third-party connections.
+         `npm run fonts:sync` re-copies them from the @fontsource packages.
+         ──────────────────────────────────────────────────────────────── -->
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/anek-bangla-bengali-800.woff2" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/hind-siliguri-bengali-400.woff2" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Orree | ওরি",
+        "url": "https://orree.bd/",
+        "logo": "https://orree.bd/icon-512.png",
+        "image": "https://orree.bd/og-image.jpg",
+        "sameAs": ["https://www.facebook.com/orree.bd"],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+8801324881188",
+          "contactType": "customer service",
+          "areaServed": "BD",
+          "availableLanguage": ["bn"]
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Gollamari, Sonadanga",
+          "addressLocality": "Khulna",
+          "postalCode": "9100",
+          "addressCountry": "BD"
+        }
+      }
+    </script>
+
+    <!-- ── Analytics & Pixel ────────────────────────────────────────────
+         IDs come from build-time env vars (Cloudflare Pages → Settings →
+         Environment variables):
+             VITE_GA4_ID                    G-XXXXXXXXXX
+             VITE_META_PIXEL_ID             000000000000000
+             VITE_FB_DOMAIN_VERIFICATION    domain verification token
+         Empty values mean that tracker simply never initialises. -->
+    <script>
+      (function () {
+        var GA4 = "%VITE_GA4_ID%";
+        var ADS = "%VITE_GOOGLE_ADS_ID%";
+        var PIXEL = "%VITE_META_PIXEL_ID%";
+        var ok = function (v) { return v && v.indexOf("VITE_") === -1 && v.indexOf("%") === -1; };
+
+        /* Capture fbclid into a _fbc cookie BEFORE the Pixel loads.
+           Roughly a quarter to a third of Bangladeshi mobile sessions block or
+           badly delay fbevents.js. Those clicks used to arrive with no click ID
+           at all and were permanently unattributable — the server events had
+           nothing to join on. Writing the cookie ourselves means CAPI can still
+           credit the ad even when the browser Pixel never runs. */
+        try {
+          if (!/(^|;\s*)_fbc=/.test(document.cookie)) {
+            var fbclid = new URLSearchParams(location.search).get("fbclid");
+            if (fbclid) {
+              document.cookie =
+                "_fbc=fb.1." + Date.now() + "." + fbclid +
+                ";expires=" + new Date(Date.now() + 7776e6).toUTCString() +
+                ";path=/;SameSite=Lax";
+            }
+          }
+        } catch (e) {}
+
+        if (ok(GA4) || ok(ADS)) {
+          var g = document.createElement("script");
+          g.async = true;
+          g.src = "https://www.googletagmanager.com/gtag/js?id=" + (ok(GA4) ? GA4 : ADS);
+          document.head.appendChild(g);
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = function () { dataLayer.push(arguments); };
+          gtag("js", new Date());
+
+          if (ok(GA4)) gtag("config", GA4, { send_page_view: false });
+
+          /* Google Ads needs its own config on the same gtag instance.
+             GA4's purchase event does NOT feed Ads bidding by itself — without
+             an AW- config plus a conversion label, Smart Bidding and
+             Performance Max optimise toward clicks instead of orders.
+             allow_enhanced_conversions lets the Ads tag use the hashed phone
+             we already collect at checkout, which recovers conversions that
+             cookie loss would otherwise drop. */
+          if (ok(ADS)) gtag("config", ADS, { allow_enhanced_conversions: true });
+        }
+
+        if (ok(PIXEL)) {
+          !(function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+              n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = "2.0";
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s);
+          })(window, document, "script", "https://connect.facebook.net/en_US/fbevents.js");
+          fbq("init", PIXEL);
+          /* The ONLY PageView on initial load. tracker.js skips its first
+             route-change call to match — previously both fired, doubling
+             Landing Page Views in Ads Manager and halving every conversion
+             rate that divides by them. */
+          fbq("track", "PageView");
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      <div style="padding:2rem;font-family:system-ui;color:#F5EFE2;background:#15362A">
+        অর্ডার করতে জাভাস্ক্রিপ্ট চালু করুন, অথবা সরাসরি কল করুন — ০১৩২৪-৮৮১১৮৮
+      </div>
+    </noscript>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

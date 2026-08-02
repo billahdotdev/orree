@@ -1,0 +1,47 @@
+# Cloudflare Pages headers.
+# Docs: https://developers.cloudflare.com/pages/configuration/headers/
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), interest-cohort=()
+  X-DNS-Prefetch-Control: on
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob: https://www.facebook.com https://www.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://www.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://connect.facebook.net https://script.google.com https://script.googleusercontent.com; frame-src https://challenges.cloudflare.com; form-action 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests
+
+# CSP note: every origin above is load-bearing.
+#   googletagmanager  → GA4        connect.facebook.net → Meta Pixel
+#   challenges.cloudflare.com      → Turnstile widget + its iframe
+#   Fonts are self-hosted, so font-src is 'self' only — no third-party
+#   font origin can be reached even if a dependency tries.
+#   script.google(usercontent).com → Apps Script order webhook (it 302s from
+#                                     the first host to the second, so BOTH
+#                                     must be allow-listed or orders fail)
+# 'unsafe-inline' in script-src is required by the GA4/Pixel bootstrap in
+# index.html. Removing it means moving that snippet to an external hashed
+# file — worth doing eventually, not worth breaking tracking for today.
+
+# Vite fingerprints everything in /assets with a content hash — cache hard.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Self-hosted fonts are content-stable under these exact filenames — cache
+# them for a year. Replacing a font means changing the filename.
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+
+# Product images swap in place from /admin under the same filename, so keep
+# the browser cache short. Purge in the Cloudflare dashboard to force-refresh.
+/products/*
+  Cache-Control: public, max-age=3600
+
+# The HTML shell must never be stale or users get an old app referencing
+# hashed assets that no longer exist.
+/index.html
+  Cache-Control: no-cache
+
+# Never cache the CAPI relay.
+/api/*
+  Cache-Control: no-store

@@ -1,0 +1,17 @@
+# dependencies & build output
+node_modules/
+dist/
+
+# env & secrets (never commit real values — use .env.example as the template)
+.env
+.env.local
+.env.*.local
+.dev.vars
+
+# Cloudflare Wrangler / Pages local
+.wrangler/
+
+# logs & OS cruft
+npm-debug.log*
+yarn-error.log*
+.DS_Store

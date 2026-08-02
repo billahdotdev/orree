@@ -1,0 +1,9 @@
+# Cloudflare Pages SPA fallback.
+# Any path that isn't a real static file serves index.html, letting
+# react-router handle /candy, /moshla, /lp/*, /admin etc. on hard refresh or
+# a direct link.
+#
+# Pages Functions (functions/api/*) are matched before this rule, so /api/capi
+# still reaches its Function. Even if it didn't, the client's CAPI beacon
+# failing is a silent no-op — GA4 and the Meta Pixel are unaffected.
+/*    /index.html   200

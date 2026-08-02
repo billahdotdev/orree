@@ -1,0 +1,56 @@
+# Orree | ওরি — robots.txt
+
+# Search engines & general crawlers
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /lp/
+
+# AI assistants & answer engines are welcome to read public brand/product
+# pages — this helps people discover Orree through AI tools. The admin panel
+# and short-lived ad landing pages (/lp/*) stay off-limits.
+User-agent: GPTBot
+Allow: /
+Disallow: /admin
+Disallow: /lp/
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /admin
+Disallow: /lp/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /admin
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin
+Disallow: /lp/
+
+User-agent: Claude-User
+Allow: /
+Disallow: /admin
+
+User-agent: anthropic-ai
+Allow: /
+Disallow: /admin
+Disallow: /lp/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin
+Disallow: /lp/
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin
+Disallow: /lp/
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /admin
+Disallow: /lp/
+
+# For a structured brand summary meant for AI tools, see /llms.txt
+Sitemap: https://orree.bd/sitemap.xml

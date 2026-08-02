@@ -1,0 +1,11 @@
+# Cloudflare Pages project config.
+#
+# Deploy via the dashboard (Workers & Pages → Create → Pages → Connect to Git)
+# or from the CLI with `npx wrangler pages deploy dist`.
+#
+# Secrets are NOT set here — put them in the dashboard under
+# Settings → Variables and Secrets so they never land in git:
+#   META_PIXEL_ID, META_CAPI_TOKEN, META_TEST_EVENT_CODE, TURNSTILE_SECRET_KEY
+name = "orree"
+compatibility_date = "2026-01-01"
+pages_build_output_dir = "dist"

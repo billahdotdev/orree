@@ -1,0 +1,558 @@
+/* ── Self-hosted fonts ──────────────────────────────────────────────────
+   Previously loaded from fonts.googleapis.com: 3 families × 10 weights,
+   which on a Dhaka 4G handset meant two extra DNS+TLS handshakes and two
+   serial round-trips (CSS, then the font files) before any branded text
+   could paint.
+
+   Now served from our own origin, immutable-cached for a year, cut to the
+   4 weights the codebase actually uses (audited: display uses 600 & 800,
+   body uses 400 & 600 — everything else was synthesised or unused).
+
+   unicode-range splits Bengali from Latin, so a page with no Latin glyphs
+   never downloads the Latin file at all.
+
+   To trim a further ~35%: drop Hind Siliguri and point `body` at Anek
+   Bangla 400 in tailwind.config.js. Anek was designed by Ek Type for Indic
+   UI text and reads cleanly at body size — it is a typographic decision,
+   not a technical one, so it is left to you.
+   ───────────────────────────────────────────────────────────────────── */
+
+@font-face {
+  font-family: "Anek Bangla";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/anek-bangla-bengali-600.woff2") format("woff2");
+  unicode-range: U+0951-0952, U+0964-0965, U+0980-09FE, U+1CD0, U+1CD2, U+1CD5-1CD6, U+1CD8, U+1CE1, U+1CEA, U+1CED, U+1CF2, U+1CF5-1CF7, U+200C-200D, U+20B9, U+25CC, U+A8F1;
+}
+
+@font-face {
+  font-family: "Anek Bangla";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/anek-bangla-latin-600.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Anek Bangla";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("/fonts/anek-bangla-bengali-800.woff2") format("woff2");
+  unicode-range: U+0951-0952, U+0964-0965, U+0980-09FE, U+1CD0, U+1CD2, U+1CD5-1CD6, U+1CD8, U+1CE1, U+1CEA, U+1CED, U+1CF2, U+1CF5-1CF7, U+200C-200D, U+20B9, U+25CC, U+A8F1;
+}
+
+@font-face {
+  font-family: "Anek Bangla";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("/fonts/anek-bangla-latin-800.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Hind Siliguri";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/hind-siliguri-bengali-400.woff2") format("woff2");
+  unicode-range: U+0951-0952, U+0964-0965, U+0980-09FE, U+1CD0, U+1CD2, U+1CD5-1CD6, U+1CD8, U+1CE1, U+1CEA, U+1CED, U+1CF2, U+1CF5-1CF7, U+200C-200D, U+20B9, U+25CC, U+A8F1;
+}
+
+@font-face {
+  font-family: "Hind Siliguri";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/hind-siliguri-latin-400.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Hind Siliguri";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/hind-siliguri-bengali-600.woff2") format("woff2");
+  unicode-range: U+0951-0952, U+0964-0965, U+0980-09FE, U+1CD0, U+1CD2, U+1CD5-1CD6, U+1CD8, U+1CE1, U+1CEA, U+1CED, U+1CF2, U+1CF5-1CF7, U+200C-200D, U+20B9, U+25CC, U+A8F1;
+}
+
+@font-face {
+  font-family: "Hind Siliguri";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/hind-siliguri-latin-600.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ── Fallback metric matching ────────────────────────────────────────────
+   font-display:swap means text paints instantly in a system font, then
+   swaps. Without this, the swap reflows every paragraph — pure CLS, and
+   Lighthouse counts it.
+
+   The override values below are not guesses: they are the real hhea
+   metrics read out of the woff2 files.
+     Anek Bangla   upm 2000, asc 2500, desc -1232 → 125% / 61.6%
+     Hind Siliguri upm 1000, asc 1116, desc  -501 → 111.6% / 50.1%
+   Matching them makes the fallback occupy the same vertical box as the
+   real font, so the swap is invisible in layout terms.
+   ───────────────────────────────────────────────────────────────────── */
+@font-face {
+  font-family: "Anek Fallback";
+  src: local("Noto Sans Bengali"), local("Nirmala UI"), local("Arial");
+  font-display: swap;
+  ascent-override: 125%;
+  descent-override: 61.6%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: "Hind Fallback";
+  src: local("Noto Sans Bengali"), local("Nirmala UI"), local("Arial");
+  font-display: swap;
+  ascent-override: 111.6%;
+  descent-override: 50.1%;
+  line-gap-override: 0%;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-green-mist/20;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    /* The decorative CTA sweep adds nothing for these users — remove it. */
+    .btn-amber::after {
+      display: none !important;
+    }
+  }
+
+  /* Kill the grey flash iOS paints over tapped elements — our own
+     active:scale states communicate the press far better. */
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-green-deep text-cream font-body antialiased;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+
+  ::selection {
+    background: #E0661F;
+    color: #15362A;
+  }
+
+  /* slim, warm scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0D241B;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #3A6350;
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #E0661F;
+  }
+
+  /* visible keyboard focus, everywhere */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: 2px solid #E0661F;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  /* Core glassmorphic surface used across the site (header, cards, modals).
+     Built to read like real glass: a lit top edge, a faint inner highlight,
+     a whisper of grain across the surface, and depth beneath. Depth comes in
+     three tiers so a modal can sit visibly "above" a card. */
+  .glass,
+  .glass-sm,
+  .glass-lg {
+    background-image:
+      /* top-lit inner sheen */
+      linear-gradient(rgba(232, 214, 172, 0.05), rgba(232, 214, 172, 0.015) 45%, rgba(13, 36, 27, 0.02)),
+      /* faint grain so the surface isn't dead-flat */
+      theme(backgroundImage.grain);
+    background-color: rgba(232, 214, 172, 0.055);
+    border: 1px solid rgba(232, 214, 172, 0.12);
+    /* light comes from above: brighter top edge, quieter sides */
+    border-top-color: rgba(232, 214, 172, 0.2);
+  }
+
+  .glass-sm {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: inset 0 1px 0 0 rgba(232, 214, 172, 0.08), 0 4px 18px 0 rgba(13, 36, 27, 0.25);
+  }
+
+  .glass {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: inset 0 1px 0 0 rgba(232, 214, 172, 0.1), 0 8px 32px 0 rgba(13, 36, 27, 0.35);
+  }
+
+  .glass-lg {
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow: inset 0 1px 0 0 rgba(232, 214, 172, 0.12), 0 20px 60px -8px rgba(6, 20, 14, 0.6);
+  }
+
+  .glass-amber {
+    background-image: linear-gradient(rgba(224, 102, 31, 0.08), rgba(224, 102, 31, 0.02));
+    background-color: rgba(224, 102, 31, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(224, 102, 31, 0.28);
+    border-top-color: rgba(224, 102, 31, 0.4);
+    box-shadow: inset 0 1px 0 0 rgba(232, 214, 172, 0.08);
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-[13px] tracking-[0.22em] uppercase text-cream/60 font-body font-medium;
+  }
+
+  .container-orree {
+    @apply mx-auto w-full max-w-6xl px-6 sm:px-8 lg:px-10;
+  }
+
+  .btn-amber {
+    @apply relative overflow-hidden inline-flex items-center justify-center gap-2 rounded-full bg-amber px-7 py-3.5 font-display font-semibold text-cream shadow-amber-glow transition-all duration-300 hover:bg-amber-deep hover:shadow-[0_0_50px_0_rgba(224,102,31,0.4)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.97];
+  }
+
+  /* Light sweeps across the primary CTA occasionally — draws the eye back
+     to the action without shouting. Disabled under reduced-motion below. */
+  .btn-amber::after {
+    content: "";
+    @apply pointer-events-none absolute inset-y-0 w-1/3 animate-shimmer;
+    background: linear-gradient(90deg, transparent, rgba(232, 214, 172, 0.28), transparent);
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-cream/30 px-7 py-3.5 font-display font-semibold text-cream transition-all duration-300 hover:border-amber hover:text-amber hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.97];
+  }
+
+  /* Every interactive control gets a consistent, satisfying press response. */
+  .tap {
+    @apply transition-transform duration-150 active:scale-90;
+    transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* Form fields that respond to focus with a little warmth — the border and
+     a soft halo bloom toward amber and the surface lifts, so the field the
+     customer is filling feels "awake". Used across the order form. */
+  /* The checkout sheet's entrance. On phones it rises from the bottom edge
+     like a physical drawer being pulled up — the moment of commitment feels
+     tactile. On desktop it settles in with a gentle scale. Under
+     reduced-motion the global reset collapses both to an instant appear. */
+  .sheet-in {
+    animation: sheet-up 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  @keyframes sheet-up {
+    from {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @media (min-width: 640px) {
+    .sheet-in {
+      animation: sheet-pop 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+  }
+  @keyframes sheet-pop {
+    from {
+      opacity: 0;
+      transform: translateY(14px) scale(0.975);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  .sheet-backdrop {
+    animation: sheet-backdrop 0.3s ease both;
+  }
+  @keyframes sheet-backdrop {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  /* Cap the sheet at the *visible* viewport. On mobile, vh counts the area
+     behind the address bar, so a plain 92vh sheet can slip under the browser
+     chrome; dvh tracks the real visible height. vh stays as the fallback for
+     the rare browser without dvh. */
+  .sheet-maxh {
+    max-height: 92vh;
+    max-height: 92dvh;
+  }
+
+  .field-input {
+    @apply w-full rounded-xl border border-cream/15 bg-cream/5 px-4 py-3 text-cream placeholder:text-cream/30 outline-none;
+    transition: border-color 0.25s ease, box-shadow 0.3s ease, background-color 0.25s ease;
+    caret-color: #e0661f;
+  }
+  .field-input:focus {
+    border-color: rgba(224, 102, 31, 0.85);
+    background-color: rgba(232, 214, 172, 0.08);
+    box-shadow: 0 0 0 3px rgba(224, 102, 31, 0.12), 0 6px 20px -10px rgba(224, 102, 31, 0.35);
+  }
+  /* The whole field warms up when it's being filled: label lifts a touch and
+     turns amber, so the customer's eye stays with the field they're in. */
+  .field-group > label {
+    transition: color 0.25s ease, transform 0.25s ease;
+    transform-origin: left center;
+  }
+  .field-group:focus-within > label {
+    color: rgba(224, 102, 31, 0.9);
+    transform: translateY(-1px);
+  }
+
+  /* A small spring pop for elements that appear in place (e.g. the ✓ that
+     confirms a field is valid). */
+  .pop-in {
+    animation: pop-in 0.34s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+  @keyframes pop-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.4);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Order-placed celebration — warm, not loud. The badge springs in while
+     two soft rings ripple outward once and fade, like a stone dropped in
+     still water. No confetti; this brand celebrates quietly. */
+  .success-badge {
+    animation: success-pop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+
+  /* Self-drawing seal: the ring sweeps closed, then the tick strokes in. */
+  .seal-circle {
+    stroke-dasharray: 151;
+    stroke-dashoffset: 151;
+    animation: seal-draw 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.06s forwards;
+  }
+  .seal-check {
+    stroke-dasharray: 42;
+    stroke-dashoffset: 42;
+    animation: seal-draw 0.42s cubic-bezier(0.16, 1, 0.3, 1) 0.52s forwards;
+  }
+  @keyframes seal-draw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  /* A single warm glow that blooms out behind the seal, once. */
+  .seal-warmth {
+    background: radial-gradient(circle, rgba(224, 102, 31, 0.3) 0%, rgba(232, 214, 172, 0.12) 45%, transparent 70%);
+    animation: seal-warmth 1.2s ease-out 0.1s forwards;
+  }
+  @keyframes seal-warmth {
+    0% {
+      opacity: 0.6;
+      transform: scale(0.4);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.75);
+    }
+  }
+  /* Reduced-motion: the seal should simply *be* complete — no delayed draw,
+     no bloom. (The global reset only zeroes durations, not delays, so the
+     staggered strokes need this explicit stop.) */
+  @media (prefers-reduced-motion: reduce) {
+    .seal-circle,
+    .seal-check {
+      animation: none !important;
+      stroke-dashoffset: 0 !important;
+    }
+    .seal-warmth {
+      display: none !important;
+    }
+  }
+  .success-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    border: 1.5px solid rgba(224, 102, 31, 0.5);
+    animation: success-ring 1.15s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .success-ring--2 {
+    animation-delay: 0.18s;
+  }
+  @keyframes success-pop {
+    0% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  @keyframes success-ring {
+    0% {
+      opacity: 0.7;
+      transform: scale(0.9);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(2.3);
+    }
+  }
+
+  /* Interactive glass cards: on hover the top edge warms toward amber and a
+     soft amber halo lifts the card off the canvas. Kept faint — the amber
+     stays within its 10% budget. */
+  .glass-interactive {
+    @apply transition-all duration-300;
+  }
+  .glass-interactive:hover {
+    border-top-color: rgba(224, 102, 31, 0.35);
+    box-shadow: inset 0 1px 0 0 rgba(232, 214, 172, 0.12), 0 14px 40px -8px rgba(6, 20, 14, 0.5),
+      0 0 0 1px rgba(224, 102, 31, 0.08), 0 8px 30px -6px rgba(224, 102, 31, 0.18);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .bg-noise {
+    background-image: theme(backgroundImage.grain);
+  }
+
+  /* A route mounts with a gentle rise-and-fade instead of snapping in.
+     Applied to page roots, keyed by pathname. Honizes reduced-motion. */
+  .route-enter {
+    animation: route-fade 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  @keyframes route-fade {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Swipeable rails (gallery track, thumbnail strips) scroll natively but
+     shouldn't show a scrollbar — the dots and thumbnails are the indicator. */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Fixed bottom bars must clear the iPhone home indicator / gesture area. */
+  .safe-bottom {
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+  }
+
+  /* The tap "bloom" — a warm glow that swells from the touch point and fades.
+     Positioned by JS (see utils/tapFeedback.js); colour echoes the element.
+     Cream by default (universal, quiet); amber for the primary CTAs. */
+  .tap-bloom {
+    position: absolute;
+    height: 46px;
+    width: 46px;
+    margin: -23px 0 0 -23px;
+    border-radius: 9999px;
+    background: radial-gradient(
+      circle,
+      rgba(232, 214, 172, 0.32) 0%,
+      rgba(232, 214, 172, 0.12) 42%,
+      transparent 70%
+    );
+    animation: tap-bloom 0.52s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .tap-bloom--amber {
+    background: radial-gradient(
+      circle,
+      rgba(224, 102, 31, 0.4) 0%,
+      rgba(224, 102, 31, 0.16) 42%,
+      transparent 70%
+    );
+  }
+  @keyframes tap-bloom {
+    0% {
+      opacity: 0.9;
+      transform: scale(0.15);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(2.1);
+    }
+  }
+}
+
+/* ── Mobile GPU budget ──────────────────────────────────────────────
+   Our largest audience is on mid-range Androids, where many stacked
+   `backdrop-filter` layers make scrolling stutter. The blur radius dominates
+   that cost, so on small screens we dial it down: the frosted header still
+   reads as frosted over the content scrolling beneath it, while secondary
+   panels (which sit over the solid green canvas, where blur adds nothing
+   visible) drop it entirely. Desktop keeps the full effect. */
+@media (max-width: 640px) {
+  .glass {
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+  }
+  .glass-sm {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
