@@ -1,17 +1,6 @@
 import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 
-/**
- * Replaces every %VITE_*% token in index.html with its env value, defaulting
- * to an empty string, and strips the Meta domain-verification <meta> entirely
- * when no token is configured.
- *
- * Vite's built-in HTML env replacement leaves unmatched tokens in place, so a
- * build without the vars shipped a literal
- *   <meta name="facebook-domain-verification" content="%VITE_FB_DOMAIN_VERIFICATION%">
- * to production. Harmless but sloppy, and it makes the "is verification
- * actually live?" question un-answerable by viewing source.
- */
 function htmlEnv(env) {
   return {
     name: "orree-html-env",
@@ -28,9 +17,6 @@ function htmlEnv(env) {
   };
 }
 
-// base "/" is correct for a custom domain on Cloudflare Pages (e.g. orree.bd)
-// and for the default *.pages.dev URL. VITE_BASE_PATH is only needed when
-// hosting under a sub-path (GitHub Pages project sites) — leave it unset.
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "VITE_");
 
@@ -43,12 +29,15 @@ export default defineConfig(({ mode }) => {
       reportCompressedSize: false,
       rollupOptions: {
         output: {
-          // Split the dependencies that never change away from app code, so a
-          // copy tweak in /admin doesn't invalidate React for every returning
-          // visitor. Matters more than it looks on repeat 4G sessions.
-          manualChunks: {
-            "vendor-react": ["react", "react-dom", "react-router-dom"],
-            "vendor-icons": ["lucide-react"],
+          manualChunks(id) {
+            if (id.includes("node_modules")) {
+              if (id.includes("react") || id.includes("react-dom") || id.includes("react-router-dom")) {
+                return "vendor-react";
+              }
+              if (id.includes("lucide-react")) {
+                return "vendor-icons";
+              }
+            }
           },
         },
       },
